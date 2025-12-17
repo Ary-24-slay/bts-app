@@ -12,7 +12,7 @@ export function getSpotifyAuthUrl() {
   const params = [
     `client_id=${encodeURIComponent(SPOTIFY_CLIENT_ID)}`,
     `response_type=code`,  // changed from token → code
-    `redirect_uri=${encodeURIComponent('http://127.0.0.1:3000/')}`,
+    `redirect_uri=${encodeURIComponent('https://bts-trivia.vercel.app/')}`,
     `scope=${encodeURIComponent(SPOTIFY_SCOPES)}`
   ].join("&");
 
