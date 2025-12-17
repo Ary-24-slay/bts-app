@@ -328,7 +328,7 @@ useEffect(() => {
     // From here: code exists AND currentUser is non-null
     try {
       const backendUrl =
-  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'http://127.0.0.1:4100';
+  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'https://bts-app-1.onrender.com';
 
 const res = await fetch(`${backendUrl}/spotify/callback`, {
   method: 'POST',
@@ -3227,7 +3227,7 @@ function QuizResult({ mood, onRestart }) {
         setLoading(true);
         setError('');
         const backendUrl =
-  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'http://127.0.0.1:4100';
+  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'https://bts-app-1.onrender.com';
 
 const res = await fetch(`${backendUrl}/spotify/random-track`, {
   method: 'POST',
