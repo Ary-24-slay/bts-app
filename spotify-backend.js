@@ -9,7 +9,7 @@ const PORT = 4100;
 // TODO: replace with env vars in production
 const SPOTIFY_CLIENT_ID = 'cdb34e0585044cbe95cfefa3ef923bb0';
 const SPOTIFY_CLIENT_SECRET = 'fdba9b12e1f3468798eedf4cfa301975';
-const REDIRECT_URI = 'http://127.0.0.1:3000/';
+const REDIRECT_URI = 'https://bts-trivia.vercel.app/';
 
 const LASTFM_API_KEY = 'ed0d78983f52cfed3675b79f5ab4db15';
 
