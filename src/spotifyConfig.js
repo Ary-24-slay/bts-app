@@ -1,6 +1,6 @@
 // src/spotifyConfig.js
 const SPOTIFY_CLIENT_ID = 'cdb34e0585044cbe95cfefa3ef923bb0';
-const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:3000/';
+const SPOTIFY_REDIRECT_URI = 'https://bts-trivia.vercel.app/';
 const SPOTIFY_SCOPES = [
   'user-read-recently-played',
   'user-top-read'
