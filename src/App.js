@@ -328,14 +328,14 @@ useEffect(() => {
     // From here: code exists AND currentUser is non-null
     try {
       const backendUrl =
-  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'https://bts-app-1.onrender.com';
+        process.env.REACT_APP_SPOTIFY_BACKEND_URL ||
+        'https://bts-spotify-backend.onrender.com';
 
-const res = await fetch(`${backendUrl}/spotify/callback`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ code })
-});
-
+      const res = await fetch(`${backendUrl}/spotify/callback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+      });
 
       if (!res.ok) {
         console.error('Backend Spotify callback failed');
@@ -374,8 +374,7 @@ const res = await fetch(`${backendUrl}/spotify/callback`, {
   }
 
   handleSpotifyCallback();
-}, [currentUser]);
-
+}, [currentUser, supabase]);
 
   return (
     <>
@@ -3222,36 +3221,41 @@ function QuizResult({ mood, onRestart }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    async function fetchTrack() {
-      try {
-        setLoading(true);
-        setError('');
-        const backendUrl =
-  process.env.REACT_APP_SPOTIFY_BACKEND_URL || 'https://bts-app-1.onrender.com';
+  async function fetchTrack() {
+    try {
+      setLoading(true);
+      setError('');
 
-const res = await fetch(`${backendUrl}/spotify/random-track`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ mood })
-});
+      const backendUrl =
+        process.env.REACT_APP_SPOTIFY_BACKEND_URL ||
+        'https://bts-spotify-backend.onrender.com';
 
+      const res = await fetch(`${backendUrl}/spotify/random-track`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mood })
+      });
 
-        if (!res.ok) {
-          throw new Error('Failed to fetch track');
-        }
-
-        const data = await res.json();
-        setTrack(data);
-      } catch (err) {
-        console.error(err);
-        setError('Could not load a song right now. Please try again.');
-      } finally {
+      if (!res.ok) {
+        setError('Could not fetch a track. Please try again.');
         setLoading(false);
+        return;
       }
-    }
 
+      const data = await res.json();
+      setTrack(data);
+      setLoading(false);
+    } catch (e) {
+      console.error(e);
+      setError('Something went wrong. Please try again.');
+      setLoading(false);
+    }
+  }
+
+  if (mood) {
     fetchTrack();
-  }, [mood]);
+  }
+}, [mood]);
 
   if (loading) {
     return <p style={{ textAlign: 'center' }}>Finding the perfect BTS song for you…</p>;
